@@ -8,12 +8,12 @@ from esphome.const import (
     CONF_COLD_WHITE_COLOR_TEMPERATURE,
     CONF_WARM_WHITE_COLOR_TEMPERATURE,
     CONF_REVERSED,
+    CONF_ALLOCATED_ID,
     CONF_MIN_BRIGHTNESS, # New in 2023.5
 )
 
 AUTO_LOAD = ["esp32_ble"]
 DEPENDENCIES = ["esp32"]
-CONF_ALLOCATED_ID = 0xbabecafe
 
 lampsmartpro_ns = cg.esphome_ns.namespace('lampsmartpro')
 LampSmartProLight = lampsmartpro_ns.class_('LampSmartProLight', cg.Component, light.LightOutput)
