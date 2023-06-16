@@ -141,7 +141,7 @@ void LampSmartProLight::dump_config() {
   ESP_LOGCONFIG(TAG, "  Minimum Brightness: %d", min_brightness_);
   ESP_LOGCONFIG(TAG, "  Transmission Duration: %d millis", tx_duration_);
   ESP_LOGCONFIG(TAG, "  Allocated ID (testing): %d", allocated_id_);
-  ESP_LOGCONFIG(TAG, "  Generated ID: %d", light_state_ ? light_state_->get_object_id_hash() : "");
+  ESP_LOGCONFIG(TAG, "  Generated ID: %u", light_state_ ? light_state_->get_object_id_hash() : "");
 }
 
 void LampSmartProLight::on_pair() {
