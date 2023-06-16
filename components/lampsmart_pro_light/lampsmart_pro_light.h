@@ -20,6 +20,7 @@ class LampSmartProLight : public light::LightOutput, public Component, public En
 
   void set_cold_white_temperature(float cold_white_temperature) { cold_white_temperature_ = cold_white_temperature; }
   void set_warm_white_temperature(float warm_white_temperature) { warm_white_temperature_ = warm_white_temperature; }
+  void set_allocated_id(uint32_t allocated_id) { allocated_id_ = allocated_id; }
   void set_constant_brightness(bool constant_brightness) { constant_brightness_ = constant_brightness; }
   void set_reversed(bool reversed) { reversed_ = reversed; }
   void set_min_brightness(uint8_t min_brightness) { min_brightness_ = min_brightness; }
@@ -35,6 +36,7 @@ class LampSmartProLight : public light::LightOutput, public Component, public En
 
   float cold_white_temperature_{167};
   float warm_white_temperature_{333};
+  uint32_t allocated_id_;
   bool constant_brightness_;
   bool reversed_;
   uint8_t min_brightness_;
