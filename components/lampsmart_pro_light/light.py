@@ -13,6 +13,7 @@ from esphome.const import (
 
 AUTO_LOAD = ["esp32_ble"]
 DEPENDENCIES = ["esp32"]
+CONF_ALLOCATED_ID = 0xbabecafe
 
 lampsmartpro_ns = cg.esphome_ns.namespace('lampsmartpro')
 LampSmartProLight = lampsmartpro_ns.class_('LampSmartProLight', cg.Component, light.LightOutput)
@@ -28,6 +29,7 @@ CONFIG_SCHEMA = cv.All(
             cv.Optional(CONF_CONSTANT_BRIGHTNESS, default=False): cv.boolean,
             cv.Optional(CONF_REVERSED, default=False): cv.boolean,
             cv.Optional(CONF_MIN_BRIGHTNESS, default=0x7): cv.hex_uint8_t,
+            cv.Optional(CONF_ALLOCATED_ID): cv.hex_uint32_t,
         }
     ),
     cv.has_none_or_all_keys(
@@ -50,6 +52,11 @@ async def to_code(config):
     if CONF_WARM_WHITE_COLOR_TEMPERATURE in config:
         cg.add(
             var.set_warm_white_temperature(config[CONF_WARM_WHITE_COLOR_TEMPERATURE])
+        )
+
+    if CONF_ALLOCATED_ID in config:
+        cg.add(
+            var.set_allocated_id(config[CONF_ALLOCATED_ID])
         )
 
     cg.add(var.set_constant_brightness(config[CONF_CONSTANT_BRIGHTNESS]))
