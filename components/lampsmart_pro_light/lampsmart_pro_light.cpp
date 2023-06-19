@@ -141,7 +141,7 @@ void LampSmartProLight::dump_config() {
   ESP_LOGCONFIG(TAG, "  Minimum Brightness: %d", min_brightness_);
   ESP_LOGCONFIG(TAG, "  Transmission Duration: %d millis", tx_duration_);
   ESP_LOGCONFIG(TAG, "  Allocated ID (testing): %d", allocated_id_);
-  ESP_LOGCONFIG(TAG, "  Generated ID: %u", light_state_ ? light_state_->get_object_id_hash() : 0x00000000);
+  ESP_LOGCONFIG(TAG, "  Generated ID: %lX", light_state_ ? light_state_->get_object_id_hash() : 0x00000000);
 }
 
 void LampSmartProLight::on_pair() {
@@ -171,7 +171,10 @@ void LampSmartProLight::send_packet(uint16_t cmd, uint8_t cold, uint8_t warm) {
       ._26 = 0,
       .rand = seed,
   }};
-
+  ESP_LOGD(TAG, "LampSmartProLight::packet (pre-processed):");
+  for (int i = 0; i < 32; i++) {
+      ESP_LOGD(TAG, "%lX", packet.raw[i]);
+  }  
   ble_whiten(&packet.raw[9], 0x12, (uint8_t) seed, 0);
   packet.crc16 = v2_crc16_ccitt(&packet.raw[7], 0x16, ~seed);
   
