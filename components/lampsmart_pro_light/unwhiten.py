@@ -1,7 +1,7 @@
 # This file "unwhitens" a packet captured by ESPHome
 # enter e.g. raw = '02.01.01.1B.03.F0.08.10.80.D1.A2.BA.77.9E.70.9E.AE.C2.5F.67.6E.A6.9D.65.F4.B4.A0.51.A8.9A.C8'
 # handle_raw(raw)
-
+print("Unwhiten lampsmart pro packets. Paste your packet here\n")
 import sys
 
 XBOXES = [
@@ -29,7 +29,6 @@ def unwhiten(buf, size, seed):
     res.append(buf[i] ^ XBOXES[(seed + i + 9) & 0x1f])
     res[i] ^= seed
     res[i] &= 0xff
-    res[i] = hex(res[i])
   return res
 
 def process_raw(raw):
@@ -49,13 +48,13 @@ def unpack_packet(hex_packet):
 def hex_view(res):
   print("original packet:\n")
   print(' '.join('{:02x}'.format(x) for x in res))
-  
+
 def handle_raw(s):
   p = process_raw(s)
   a, b, c = unpack_packet(p)
   r = unwhiten(a, b, c)
   hex_view(r)
-  
+
 
 for line in sys.stdin:
     if 'Exit' == line.rstrip():
