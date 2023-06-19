@@ -2,6 +2,8 @@
 # enter e.g. raw = '02.01.01.1B.03.F0.08.10.80.D1.A2.BA.77.9E.70.9E.AE.C2.5F.67.6E.A6.9D.65.F4.B4.A0.51.A8.9A.C8'
 # handle_raw(raw)
 
+import sys
+
 XBOXES = [
   0xB7, 0xFD, 0x93, 0x26, 0x36, 0x3F, 0xF7, 0xCC,
   0x34, 0xA5, 0xE5, 0xF1, 0x71, 0xD8, 0x31, 0x15,
@@ -55,3 +57,9 @@ def handle_raw(s):
   hex_view(r)
   
 
+for line in sys.stdin:
+    if 'Exit' == line.rstrip():
+        break
+    print(f'Processing Message from sys.stdin *****{line}*****')
+    handle_raw(line)
+print("Done")
