@@ -162,7 +162,7 @@ void LampSmartProLight::send_packet(uint16_t cmd, uint8_t cold, uint8_t warm) {
       .packet_number = ++(this->tx_count_),
       .type = 0x100,
       .identifier = 0x0278547a,
-      .var2 = 0x0,
+      .var2 = 0x1,
       .command = cmd,
       ._20 = 0,
       .channel1 = reversed_ ? warm : cold,
