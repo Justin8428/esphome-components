@@ -158,10 +158,10 @@ void LampSmartProLight::send_packet(uint16_t cmd, uint8_t cold, uint8_t warm) {
   uint16_t seed = (uint16_t) rand();
 
   adv_data_t packet = {{
-      .prefix = {0x02, 0x01, 0x01, 0x1B, 0x03, 0xF0, 0x08, 0x10, 0x80, 0x00},
+      .prefix = {0x02, 0x01, 0x01, 0x1B, 0x03, 0xF9, 0x08, 0x49, 0x13, 0x00},
       .packet_number = ++(this->tx_count_),
       .type = 0x100,
-      .identifier = 0x0278547a,
+      .identifier = 0x76d46c92,
       .var2 = 0x1,
       .command = cmd,
       ._20 = 0,
